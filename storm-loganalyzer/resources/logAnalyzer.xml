@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.dao.mapper.LogAnalyzerMapper">
+    <select id="findAllJobList" resultType="com.study.domain.LogAnalyzeJob">
+        SELECT
+			jobId, jobName, jobType
+		FROM
+			log_analyze_job
+		WHERE
+		  status = 1;
+    </select>
+    <select id="findJobDetailList" resultType="com.study.domain.LogAnalyzeJobDetail">
+	SELECT condi.jobId, condi.field, condi.value, condi.compare
+    FROM log_analyze.log_analyze_job job
+	LEFT JOIN log_analyze.log_analyze_job_condition condi ON job.jobId = condi.jobId
+    WHERE job.status = 1
+	</select>
+</mapper>
