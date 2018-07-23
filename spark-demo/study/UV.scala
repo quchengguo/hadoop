@@ -12,7 +12,7 @@ object UV {
     val sparkConf: SparkConf = new SparkConf().setAppName("UV").setMaster("local[2]")
     val sc: SparkContext = new SparkContext(sparkConf)
     // 1.读取数据
-    val file: RDD[String] = sc.textFile("E:\\chuanzhi\\学习资料\\Hadoop\\spark\\day02\\资料\\运营商日志\\access.log")
+    val file: RDD[String] = sc.textFile("E:\\access.log")
 
     // 2.对每一行分割，获取IP地址
     val ips: RDD[(String)] = file.map(_.split(" ")).map(x => x(0))

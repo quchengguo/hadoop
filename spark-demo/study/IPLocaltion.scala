@@ -20,7 +20,7 @@ object IPLocaltion {
     val sparkConf: SparkConf = new SparkConf().setAppName("IPLocaltion_Test").setMaster("local[2]")
     val sc = new SparkContext(sparkConf)
     // 1.获取基站数据
-    val data: RDD[(String)] = sc.textFile("E:\\chuanzhi\\学习资料\\Hadoop\\spark\\day02\\资料\\服务器访问日志根据ip地址查找区域\\ip.txt")
+    val data: RDD[(String)] = sc.textFile("E:\\ip.txt")
 
     // 2.对数据进行切分，获取需要的字段（ipStart, ipEnd, 城市位置， 经度， 纬度）
     val jizhanRDD: RDD[(String, String, String, String, String)] = data.map(_.split("\\|")).map(x => (x(2), x(3), x(4) + "-" + x(5) + "-" + x(6) + "-" + x(7) + "-" + x(8), x(13), x(14)))
@@ -28,7 +28,7 @@ object IPLocaltion {
     // 广播变量，一个只读数据区，所有task都能读到的地方
     val jizhanBroadcast: Broadcast[Array[(String, String, String, String, String)]] = sc.broadcast(jizhanData)
     // 读取目标数据
-    val destData: RDD[(String)] = sc.textFile("E:\\chuanzhi\\学习资料\\Hadoop\\spark\\day02\\资料\\服务器访问日志根据ip地址查找区域\\20090121000132.394251.http.format")
+    val destData: RDD[(String)] = sc.textFile("E:\\20090121000132.394251.http.format")
     // 获取ip地址字段
     val ipData: RDD[(String)] = destData.map(_.split("\\|")).map(x => x(1))
     // 把IP地址转换为long类型，然后通过二分法去基站数据中查找，找到的纬度做wordCount

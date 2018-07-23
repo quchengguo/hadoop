@@ -14,7 +14,7 @@ object TopN {
     sc.setLogLevel("WARN")
 
     // 1.读取数据
-    val file: RDD[String] = sc.textFile("E:\\chuanzhi\\学习资料\\Hadoop\\spark\\day02\\资料\\运营商日志\\access.log")
+    val file: RDD[String] = sc.textFile("E:\\access.log")
 
     // 2.将一行数据作为输入,输出（来源URL, 1）
     val refUrlAndOne: RDD[(String, Int)] = file.map(_.split(" ")).filter(_.length > 10).filter(x=>x(10)!="\"-\"").map(x => (x(10), 1))

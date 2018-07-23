@@ -12,7 +12,7 @@ object PV {
     val sparkConf: SparkConf = new SparkConf().setAppName("PV").setMaster("local[2]")
     val context = new SparkContext(sparkConf)
     // 1.读取数据
-    val file : RDD[String]= context.textFile("E:\\chuanzhi\\学习资料\\Hadoop\\spark\\day02\\资料\\运营商日志\\access.log")
+    val file : RDD[String]= context.textFile("E:\\access.log")
     // 2.计算总数
     println(file.count())
     context.stop()
