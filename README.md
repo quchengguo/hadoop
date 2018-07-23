@@ -6,3 +6,4 @@ hadoop相关案例：
 * storm-loganalyzer点击流日志分析
 * hbase-javaAPI
 * 利用akka实现简易版的spark通信框架
+* spark RDD编程实战(点击流日志分析)
